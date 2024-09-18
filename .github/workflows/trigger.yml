@@ -2,6 +2,7 @@ name: exploring triggers
 
 on: 
     workflow_dispatch:
+    #workflow_dispatch:
  # schedule:
   #  - cron: "*/1 * * * *"
     #push
