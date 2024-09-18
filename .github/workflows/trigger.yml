@@ -28,5 +28,6 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: docker run
-              run: echo docker run -d -p 8080:80 $conatiner_registry/${{vars.dockerUsername}}/$imageName:latest
-
+              run: |
+               echo docker run -d -p 8080:80 $conatiner_registry/${{vars.dockerUsername}}/$imageName:latest
+               sleep 600s
