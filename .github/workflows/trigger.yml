@@ -1,0 +1,31 @@
+name: exploring triggers
+
+on: 
+  schedule:
+    - cron: "*/1 * * * *"
+    #push
+
+env:
+    conatiner_registry: docker.io
+    #dockerUsername: Siddu
+    imageName: github-actions-nginx
+jobs:
+    docker:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Docker build
+              run: echo docker build -t ${{ env.conatiner_registry}}/${{vars.dockerUsername}}/$imageName:latest
+
+            - name: Docker login
+              run: echo docker login --username=${{vars.dockerUsername}} --password=${{secrets.dockerpassword}}
+
+            - name: docker publish
+              run: echo docker $conatiner_registry/${{vars.dockerUsername}}/$imageName:latest
+
+    deploy:
+        needs: docker
+        runs-on: ubuntu-latest
+        steps:
+            - name: docker run
+              run: echo docker run -d -p 8080:80 $conatiner_registry/${{vars.dockerUsername}}/$imageName:latest
+
