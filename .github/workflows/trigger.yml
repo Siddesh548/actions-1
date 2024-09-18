@@ -31,7 +31,9 @@ jobs:
             cancel-in-progress: true
         runs-on: ubuntu-latest
         steps:
-            - name: docker run
+            - name: docker run 
+              timeout-minutes: 1
+
               run: |
                echo docker run -d -p 8080:80 $conatiner_registry/${{vars.dockerUsername}}/$imageName:latest
-               sleep 10s
+               sleep 1000s
